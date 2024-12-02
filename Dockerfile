@@ -1,8 +1,13 @@
+# syntax=docker/dockerfile:1
+
 # Build stage
-FROM python:3.11-slim AS builder
+FROM python:3.11 as builder
 
 # Set working directory
 WORKDIR /app
+
+# Install wheel and upgrade pip
+RUN pip install --no-cache-dir wheel pip setuptools --upgrade
 
 # Copy requirements
 COPY requirements.txt .
@@ -14,9 +19,12 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Production stage
-FROM python:3.11-slim
+FROM python:3.11
 
 WORKDIR /app
+
+# Install wheel and upgrade pip
+RUN pip install --no-cache-dir wheel pip setuptools --upgrade
 
 # Copy built application from builder stage
 COPY --from=builder /app .

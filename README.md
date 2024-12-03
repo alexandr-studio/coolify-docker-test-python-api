@@ -5,6 +5,7 @@ A test project built with Python, FastAPI, and Uvicorn, specifically designed to
 ## Purpose
 
 The main objectives of this repository are:
+
 - Test Docker image deployment on Coolify platform
 - Verify container orchestration and proxy handling
 - Demonstrate proper configuration for Python applications in Coolify
@@ -28,12 +29,14 @@ The main objectives of this repository are:
 ## Local Development
 
 1. Create a virtual environment:
+
    ```bash
    python -m venv venv
    source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
 
 2. Install dependencies:
+
    ```bash
    pip install -r requirements.txt
    ```
@@ -53,7 +56,7 @@ To build for a specific architecture:
 
 ```bash
 # For ARM64 (e.g., Apple Silicon M1/M2)
-docker build -t coolify-docker-test-python-api:0.1.6-arm64 .
+docker build --platform linux/arm64 -t coolify-docker-test-python-api:0.1.6-arm64 .
 
 # For AMD64 (Intel/AMD processors)
 docker build --platform linux/amd64 -t coolify-docker-test-python-api:0.1.6-amd64 .
@@ -62,6 +65,7 @@ docker build --platform linux/amd64 -t coolify-docker-test-python-api:0.1.6-amd6
 ### Publishing to Docker Hub
 
 1. Tag your architecture-specific image:
+
 ```bash
 # For ARM64
 docker tag coolify-docker-test-python-api:0.1.6-arm64 YOUR_DOCKERHUB_USERNAME/coolify-docker-test-python-api:0.1.6-arm64
@@ -71,6 +75,7 @@ docker tag coolify-docker-test-python-api:0.1.6-amd64 YOUR_DOCKERHUB_USERNAME/co
 ```
 
 2. Push to Docker Hub:
+
 ```bash
 # Push ARM64 version
 docker push YOUR_DOCKERHUB_USERNAME/coolify-docker-test-python-api:0.1.6-arm64
@@ -89,6 +94,7 @@ docker push YOUR_DOCKERHUB_USERNAME/coolify-docker-test-python-api:0.1.6-amd64
 ## Deploying to Coolify
 
 This repository is specifically designed to test Docker image deployment on Coolify. It serves as a validation tool for:
+
 - Docker image compatibility with Coolify
 - Container networking and proxy configuration
 - Environment variable handling
@@ -117,6 +123,7 @@ This repository is specifically designed to test Docker image deployment on Cool
 ### Verifying the Deployment
 
 After deployment, you can verify the setup by:
+
 1. Checking if the service is healthy in Coolify dashboard
 2. Accessing the root endpoint (`/`) through the provided URL
 3. Checking the `/version` endpoint for correct version information
@@ -140,6 +147,7 @@ Or visit the Swagger documentation at `http://localhost:3000/docs`
 ## Debugging
 
 The application includes detailed JSON logging:
+
 - All HTTP requests are logged automatically
 - Request headers and client information are captured
 - Response times and status codes are tracked
